@@ -19,7 +19,7 @@
         <svg class="player__icon-left">
           <use xlink:href="./assets/img/sprite.svg#icon-cloud" />
         </svg>
-        <svg class="player__icon-right">
+        <svg class="player__icon-right" :class="{liked: current.liked}" @click="likeSong">
           <use xlink:href="./assets/img/sprite.svg#icon-heart" />
         </svg>
         <img :src="current.art" alt class="player__album-art" />
@@ -77,43 +77,50 @@ export default {
           title: "You Set My World on Fire",
           artist: "Loving Caliber",
           src: require("./assets/You Set My World on Fire-(Rogan-Gold-Remix)-Loving-Caliber.mp3"),
-          art: require("./assets/img/loving-caliber.jpg")
+          art: require("./assets/img/loving-caliber.jpg"),
+          liked: false
         },
         {
           title: "Break Me Down",
           artist: "Catiso",
           src: require("./assets/Break-Me-Down-Catiso.mp3"),
-          art: require("./assets/img/catiso.jpg")
+          art: require("./assets/img/catiso.jpg"),
+          liked: false
         },
         {
           title: "For the Spectacle",
           artist: "Power Druid",
           src: require("./assets/For-the-Spectacle-Power-Druid.mp3"),
-          art: require("./assets/img/power.druid.jpg")
+          art: require("./assets/img/power.druid.jpg"),
+          liked: false
         },
         {
           title: "Flames",
           artist: "STRLIGHT",
           src: require("./assets/Flames-STRLIGHTmp3.mp3"),
-          art: require("./assets/img/strlight.jpg")
+          art: require("./assets/img/strlight.jpg"),
+          liked: false
         },
         {
           title: "Ganja",
           artist: "Ooyy",
           src: require("./assets/Ganja-Ooyy.mp3"),
-          art: require("./assets/img/ooyy.jpeg")
+          art: require("./assets/img/ooyy.jpeg"),
+          liked: false
         },
         {
           title: "Get it Right Now",
           artist: "Hallman",
           src: require("./assets/Get It Right Now-Hallman.mp3"),
-          art: require("./assets/img/hallmann.jpg")
+          art: require("./assets/img/hallmann.jpg"),
+          liked: false
         },
         {
           title: "Pink and Blue",
           artist: "Oominee",
           src: require("./assets/Pink-And-Blue-oomiee.mp3"),
-          art: require("./assets/img/oomiee.jpg")
+          art: require("./assets/img/oomiee.jpg"),
+          liked: false
         }
       ],
       player: new Audio()
@@ -181,6 +188,10 @@ export default {
           (this.player.currentTime / this.player.duration) * 100
         );
       }
+    },
+
+    likeSong() {
+      this.current.liked = !this.current.liked;
     }
   },
 

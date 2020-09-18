@@ -89,7 +89,9 @@ body {
 			right: 2rem;
 			height: 2rem;
 			width: 2rem;
-			fill: #f05163;
+			stroke: #f05163;
+			fill: none;
+			cursor: pointer;
 		}
 	}
 
@@ -163,4 +165,8 @@ body {
 
 		transform: translateY(-50%);
 	}
+}
+
+.liked {
+	fill: #f05163;
 }
