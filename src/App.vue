@@ -15,8 +15,8 @@
       <h4 class="header__now-playing">Now playing...</h4>
     </header>
     <main>
-      <section class="player">
-        <svg class="player__icon-left">
+      <section class="player" v-if="!showLikes">
+        <svg class="player__icon-left" @click="showLikedSongs">
           <use xlink:href="./assets/img/sprite.svg#icon-cloud" />
         </svg>
         <svg class="player__icon-right" :class="{liked: current.liked}" @click="likeSong">
@@ -58,13 +58,25 @@
           </div>
         </div>
       </section>
+      <likes-view
+        :likedSongs="likedSongs"
+        :showLikes="showLikes"
+        v-on:close-likes="showLikes = false"
+        v-on:likes-play="setCurrentFromLikes($event)"
+        v-else
+      ></likes-view>
     </main>
   </div>
 </template>
 
 <script>
+import LikesView from "./components/LikesView/LikesView.component.vue";
 export default {
   name: "App",
+
+  components: {
+    "likes-view": LikesView
+  },
 
   data() {
     return {
@@ -72,6 +84,7 @@ export default {
       index: 0,
       isPlaying: false,
       size: 0,
+      showLikes: false,
       songs: [
         {
           title: "You Set My World on Fire",
@@ -123,6 +136,9 @@ export default {
           liked: false
         }
       ],
+
+      likedSongs: [],
+
       player: new Audio()
     };
   },
@@ -192,6 +208,16 @@ export default {
 
     likeSong() {
       this.current.liked = !this.current.liked;
+      this.likedSongs = this.songs.filter(song => song.liked);
+    },
+
+    showLikedSongs() {
+      this.showLikes = true;
+    },
+
+    setCurrentFromLikes(song) {
+      this.current = song;
+      this.play(this.current);
     }
   },
 

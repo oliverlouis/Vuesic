@@ -81,6 +81,7 @@ body {
 			height: 2rem;
 			width: 2rem;
 			fill: black;
+			cursor: pointer;
 		}
 
 		&-right {
@@ -169,4 +170,24 @@ body {
 
 .liked {
 	fill: #f05163;
+	animation: liked ease;
+	animation-duration: 0.6s;
+}
+
+@keyframes liked {
+	0% {
+		transform: scale(1);
+	}
+	25% {
+		transform: scale(1.2);
+	}
+	50% {
+		transform: scale(1);
+	}
+	75% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
